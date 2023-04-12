@@ -1,5 +1,29 @@
-Exercícios - agora, a prática
-=============================
+# Exercícios - agora, a prática
+
+<details>
+<summary><strong>Orientações</strong></summary><br />
+
+**Criar e ativar ambiente virtual**
+
+  ```bash
+  $ python3 -m venv .venv && source .venv/bin/activate
+  ```
+
+**Instalar as dependências no ambiente virtual**
+
+  ```bash
+  $ python3 -m pip install -r requirements.txt
+  ```
+
+**Executar os testes**
+
+  ```bash
+  $ python3 -m pytest
+  ```
+
+</details>
+
+***
 
 Vamos colocar tudo o que vimos até agora em prática. Em todos os exercícios, resolva os problemas com testes automatizados (ao menos 4 deles por exercício) e prevenindo possíveis erros na entrada de dados e na execução do programa.
 
