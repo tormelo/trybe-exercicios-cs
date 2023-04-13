@@ -1,3 +1,4 @@
+from abc import ABC, abstractmethod
 from collections.abc import Iterator, Iterable
 
 
@@ -14,7 +15,7 @@ class IteradorDoBaralho(Iterator):
     def __init__(self, cartas, estrategia):
         self._cartas = cartas
         self._estrategia = estrategia
-        self._pos = 0 if estrategia == 1 else -1
+        self._pos = self._estrategia.posicao_inicial
 
     def __next__(self):
         try:
@@ -22,8 +23,32 @@ class IteradorDoBaralho(Iterator):
         except IndexError:
             raise StopIteration()
         else:
-            self._pos += self._estrategia
+            self._pos = self._estrategia.proxima_carta(self._pos)
             return carta
+
+
+class EstrategiaIteracao(ABC):
+    posicao_inicial = 0
+
+    @abstractmethod
+    def proxima_carta(cls, index):
+        raise NotImplementedError
+
+
+class IteracaoRegular(EstrategiaIteracao):
+    posicao_inicial = 0
+
+    @classmethod
+    def proxima_carta(cls, index):
+        return index + 1
+
+
+class IteracaoReversa(EstrategiaIteracao):
+    posicao_inicial = -1
+
+    @classmethod
+    def proxima_carta(cls, index):
+        return index - 1
 
 
 class Baralho(Iterable):
@@ -48,5 +73,5 @@ class Baralho(Iterable):
         return f"{[carta for carta in self]}"
 
 
-baralho_regular = Baralho(1)
-baralho_inverso = Baralho(-1)
+baralho_regular = Baralho(IteracaoRegular)
+baralho_inverso = Baralho(IteracaoReversa)
