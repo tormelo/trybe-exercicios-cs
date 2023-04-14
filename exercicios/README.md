@@ -1,3 +1,25 @@
+<details>
+<summary><strong>Orientações</strong></summary><br />
+
+**Criar e ativar ambiente virtual**
+
+  ```bash
+  $ python3 -m venv .venv && source .venv/bin/activate
+  ```
+
+**Instalar as dependências no ambiente virtual**
+
+  ```bash
+  $ python3 -m pip install -r requirements.txt
+  ```
+
+**Rodar banco de dados**
+
+  ```bash
+  $ docker-compose up
+  ```  
+</details>
+
 Exercício 1:
 ------------
 
