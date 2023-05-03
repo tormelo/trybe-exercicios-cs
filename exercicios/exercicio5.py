@@ -24,4 +24,4 @@ def get_server_count(grid: list[list[int]]) -> int:
 
 print(get_server_count([[1, 0], [0, 1]]))  # resultado = 0
 print(get_server_count([[1, 0], [1, 1]]))  # resultado = 3
-print(get_server_count([[1, 0, 0], [1, 0, 0], [0, 0, 1]]))  # resultado = 1
+print(get_server_count([[1, 0, 0], [1, 0, 0], [0, 0, 1]]))  # resultado = 2
