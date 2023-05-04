@@ -2,11 +2,15 @@ from node import Node
 
 
 """
+
 __get_node_at itera pela lista até chegar ao nó, portanto é O(n)
 
 insert_at, insert_last, remove_last, remove_at e get_element_at
 tem complexidade de tempo O(n) nessa implementação, já que utilizam a funcao
 __get_node_at
+
+index_of itera pela lista até encontrar o elemento, portanto é O(n)
+
 """
 
 
@@ -96,6 +100,16 @@ class LinkedList:
             value_returned = Node(value_to_be_returned.value)
         return value_returned
 
+    def index_of(self, value):
+        position = 0
+        current_value = self.head
+        while current_value:
+            if current_value.value == value:
+                return position
+            current_value = current_value.next
+            position += 1
+        return -1
+
     def is_empty(self):
         return not self.__length
 
@@ -134,3 +148,6 @@ if __name__ == "__main__":
     linked_list.insert_at(8, 3)
     linked_list.insert_at(9, 4)
     print(linked_list.get_element_at(3))
+    print(linked_list)
+    print(linked_list.index_of(8))
+    print(linked_list.index_of(10))
