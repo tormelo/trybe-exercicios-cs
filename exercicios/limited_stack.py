@@ -10,6 +10,7 @@ class LimitedStack(Stack):
         super().__init__()
         self._limit = limit
 
+    # Complexidade O(1)
     def push(self, value):
         if len(self._data) + 1 > self._limit:
             raise StackOverflow

@@ -1,5 +1,9 @@
 from stack import Stack
 
+"""
+Complexidade O(1) ao adicionar e O(n) ao remover por conta da iteração na pilha
+"""
+
 garage = Stack()
 
 while True:
