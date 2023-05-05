@@ -14,6 +14,9 @@ class Stack:
     def peek(self):
         return self._data[-1]
 
+    def min_value(self):
+        return min(self._data)  # Complexidade O(n)
+
     def is_empty(self):
         return not len(self._data)
 
@@ -21,9 +24,11 @@ class Stack:
 if __name__ == "__main__":
     stack = Stack()
 
+    stack.push(5)
     stack.push(1)
-    stack.push(2)
+    stack.push(-2)
     stack.push(3)
+    stack.push(10)
 
     print(stack)
 
@@ -32,3 +37,5 @@ if __name__ == "__main__":
     print(stack)
 
     print(stack.peek())
+
+    print(stack.min_value())  # saída: -2
