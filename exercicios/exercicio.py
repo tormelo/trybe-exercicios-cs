@@ -1,3 +1,9 @@
+"""
+O método score possui Complexidade de Tempo O(n), já que itera na lista
+de subordinados uma vez
+"""
+
+
 def score(subordinates, person):
     this_score = 1
 
