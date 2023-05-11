@@ -1,46 +1,45 @@
 """
-Na primeira execução o método get_score possui Complexidade de Tempo O(n),
-já que itera na lista de subordinados uma vez
 
-Nas execuções seguintes sua complexidade é O(1) por conta do dicionário criado
+O método add_person possui complexidade O(1) já que realiza uma
+inserção em um hashmap
+
 """
 
 
 class Hierarchy:
-    def __init__(self, subordinates):
-        self.subordinates = subordinates
-        self.scores = {}
+    def __init__(self, k):
+        self.subordinates = {}
+        # self.scores = {}
+        self.k = k
 
-    def get_score(self, person):
-        if person in self.scores:
-            return self.scores[person]
+    def add_person(self, boss, person):
+        if not boss:
+            self.subordinates[person] = []
+            return
 
-        this_score = 1
+        if len(self.subordinates[boss]) < self.k:
+            self.subordinates[boss].append(person)
+            self.subordinates[person] = []
 
-        for subordinate in self.subordinates[person]:
-            this_score += self.get_score(subordinate)
-        self.scores[person] = this_score
+        else:
+            self.add_person(self.subordinates[boss][0], person)
 
-        return this_score
+    # def get_score(self, person):
+    #     return self.scores[person]
 
 
 if __name__ == "__main__":
-    subordinates = {
-        1: [2, 3],
-        2: [4],
-        3: [],
-        4: [5, 6],
-        5: [7],
-        6: [],
-        7: [],
-    }
+    hierarchy = Hierarchy(2)
+    hierarchy.add_person(None, 1)
+    hierarchy.add_person(1, 2)
+    hierarchy.add_person(1, 3)
+    hierarchy.add_person(2, 4)
+    hierarchy.add_person(4, 5)
+    hierarchy.add_person(4, 6)
+    hierarchy.add_person(5, 7)
+    print(f"Subordinates: {hierarchy.subordinates}")
 
-    hierarchy = Hierarchy(subordinates)
-
-    print(hierarchy.get_score(1))
-    print(hierarchy.get_score(2))
-    print(hierarchy.get_score(3))
-    print(hierarchy.get_score(4))
-    print(hierarchy.get_score(5))
-    print(hierarchy.get_score(6))
-    print(hierarchy.get_score(7))
+    hierarchy.add_person(4, 8)
+    hierarchy.add_person(4, 9)
+    print("\nApós novas inserções")
+    print(f"Subordinates: {hierarchy.subordinates}")
