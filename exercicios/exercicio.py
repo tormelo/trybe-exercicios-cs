@@ -1,16 +1,27 @@
 """
-O método score possui Complexidade de Tempo O(n), já que itera na lista
-de subordinados uma vez
+Na primeira execução o método get_score possui Complexidade de Tempo O(n),
+já que itera na lista de subordinados uma vez
+
+Nas execuções seguintes sua complexidade é O(1) por conta do dicionário criado
 """
 
 
-def score(subordinates, person):
-    this_score = 1
+class Hierarchy:
+    def __init__(self, subordinates):
+        self.subordinates = subordinates
+        self.scores = {}
 
-    for subordinate in subordinates[person]:
-        this_score += score(subordinates, subordinate)
+    def get_score(self, person):
+        if person in self.scores:
+            return self.scores[person]
 
-    return this_score
+        this_score = 1
+
+        for subordinate in self.subordinates[person]:
+            this_score += self.get_score(subordinate)
+        self.scores[person] = this_score
+
+        return this_score
 
 
 if __name__ == "__main__":
@@ -24,10 +35,12 @@ if __name__ == "__main__":
         7: [],
     }
 
-    print(score(subordinates, 1))
-    print(score(subordinates, 2))
-    print(score(subordinates, 3))
-    print(score(subordinates, 4))
-    print(score(subordinates, 5))
-    print(score(subordinates, 6))
-    print(score(subordinates, 7))
+    hierarchy = Hierarchy(subordinates)
+
+    print(hierarchy.get_score(1))
+    print(hierarchy.get_score(2))
+    print(hierarchy.get_score(3))
+    print(hierarchy.get_score(4))
+    print(hierarchy.get_score(5))
+    print(hierarchy.get_score(6))
+    print(hierarchy.get_score(7))
